@@ -26,24 +26,49 @@
       padding: 16px;
       box-sizing: border-box;
     }
-    h1 {
-      margin: 0 0 2vh;
-      font-size: clamp(18px, 3vw, 32px);
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.85);
+    #soru {
+      font: inherit;
+      font-size: clamp(20px, 4vw, 40px);
+      font-weight: 700;
+      color: #d50000;
+      background: #fff;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.7em 1.4em;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #8e0000;
+      transition: transform 0.08s, box-shadow 0.08s;
     }
+    #soru:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #8e0000; }
+    #soru:active { transform: translateY(6px); box-shadow: 0 0 0 #8e0000; }
     #cevap {
+      margin-top: 4vh;
       font-size: clamp(64px, 22vw, 320px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: -0.03em;
     }
+    #cevap[hidden] { display: none; }
+    #cevap.pop { animation: pop 0.35s cubic-bezier(0.2, 1.6, 0.4, 1); }
+    @keyframes pop {
+      from { transform: scale(0.3); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
   </style>
 </head>
 <body>
   <main>
-    <h1>Trexo'da maaşlar yattı mı?</h1>
-    <div id="cevap">YATMADI</div>
+    <button id="soru" type="button">Trexo'da maaşlar yattı mı?</button>
+    <div id="cevap" hidden>YATMADI</div>
   </main>
+  <script>
+    const cevap = document.getElementById('cevap');
+    document.getElementById('soru').addEventListener('click', () => {
+      cevap.hidden = false;
+      cevap.classList.remove('pop');
+      void cevap.offsetWidth;
+      cevap.classList.add('pop');
+    });
+  </script>
 </body>
 </html>
